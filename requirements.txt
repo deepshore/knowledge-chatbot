@@ -1,1 +1,3 @@
+llama_index
+langchain
 fastapi[all]
