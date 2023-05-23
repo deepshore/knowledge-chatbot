@@ -1,17 +1,5 @@
 import { api } from 'boot/axios';
-
-export interface DeepshoreChatRequest {
-  question: string;
-  timestamp?: string;
-}
-
-export interface DeepshoreChatResponse {
-  origin?: DeepshoreChatRequest;
-  answer: string;
-  related_articles: Array<string>;
-  error?: string;
-  timestamp?: string;
-}
+import { DeepshoreChatRequest, DeepshoreChatResponse } from 'src/types/chat';
 
 export async function sendQuestion(
   data: DeepshoreChatRequest

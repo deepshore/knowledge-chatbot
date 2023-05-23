@@ -1,14 +1,7 @@
 <template>
-  <div class="row justify-center" style="width: 66%">
-    <div
-      style="
-        width: 100%;
-        max-height: 85vh;
-        min-height: 85vh;
-        overflow-x: auto;
-        padding: 1em;
-      "
-    >
+  <div class="row justify-center chat-row">
+    <div class="chat-div">
+      <q-chat-message :label="chatLabel" role="heading" aria-level="1" />
       <q-chat-message
         v-for="msg in chat"
         :key="msg.id"
@@ -30,7 +23,7 @@
         </div>
       </q-chat-message>
     </div>
-    <div class="" style="width: 50%">
+    <div class="chat-input-div">
       <q-input
         outlined
         v-model="message"
@@ -40,7 +33,7 @@
         <template v-slot:after>
           <q-btn
             title="Nachricht abschicken"
-            color="secondary"
+            color="primary"
             round
             dense
             flat
@@ -57,17 +50,25 @@
 <script setup lang="ts">
 import { ref, computed, Ref } from 'vue';
 import { date } from 'quasar';
+import { sendQuestion } from 'src/api/index';
 import {
+  DeepshoreChatMessage,
   DeepshoreChatRequest,
-  DeepshoreChatResponse,
-  sendQuestion
-} from '../api/index';
+  DeepshoreChatResponse
+} from 'src/types/chat';
 
-import { ChatMessage } from './models';
-
+// data
 let message = ref('');
-let chat: Ref<Array<ChatMessage>> = ref([]);
+let chat: Ref<Array<DeepshoreChatMessage>> = ref([]);
 let blockedAPI = ref(false);
+const errMessages = [
+  'Ich habe die Frage leider nicht verstanden. Bitte versuche es mit einer anderen Formulierung.',
+  'Ich habe leider keine Antwort parat. Kannst du die Frage anders formulieren?',
+  'Tut mir leid, aber ich kann deine Frage leider nicht beantworten. Bitte versuche es mit einer anderen Formulierung.',
+  'Könntest du die Frage bitte noch einmal anders formulieren?'
+];
+
+// computed
 const isDisabled = computed(() => {
   // Prevent empty msg
   if (message.value.length == 0) {
@@ -80,6 +81,12 @@ const isDisabled = computed(() => {
   return false;
 });
 
+const chatLabel = computed(() => {
+  const timeStamp = Date.now();
+  return `Chat: ${date.formatDate(timeStamp, 'ddd, DD.MM.YY')}`;
+});
+
+// Methods
 async function addMessage() {
   if (!blockedAPI.value) {
     // Only allow one request add a time
@@ -87,7 +94,7 @@ async function addMessage() {
     // Get formated Timestamp
     let stamp = createTimestamp();
     let question = message.value;
-    let msg: ChatMessage = {
+    let msg: DeepshoreChatMessage = {
       id: chat.value.length,
       name: 'Du',
       text: question,
@@ -98,7 +105,7 @@ async function addMessage() {
     };
     chat.value.push(msg);
     // Add tmp answer to chat
-    let chatAnswer: ChatMessage = {
+    let chatAnswer: DeepshoreChatMessage = {
       id: chat.value.length,
       name: 'Deepshore',
       text: '',
@@ -119,8 +126,7 @@ async function addMessage() {
     const response = await sendQuestion(body);
     let answer: string;
     if (response.error) {
-      answer =
-        'Ich habe die Frage leider nicht verstanden. Bitte versuche es mit einer anderen Formulierung.';
+      answer = errMessages[getRandomInt(errMessages.length - 1)];
     } else {
       answer = buildAnswerText(response);
     }
@@ -159,6 +165,10 @@ async function addMessage() {
     const timeStamp = Date.now();
     const formattedString = `${date.formatDate(timeStamp, format)} Uhr`;
     return formattedString;
+  }
+
+  function getRandomInt(max: number) {
+    return Math.floor(Math.random() * max);
   }
 }
 </script>
