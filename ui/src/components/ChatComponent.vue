@@ -114,7 +114,7 @@ async function addMessage(): Promise<void> {
       name: 'Deepshore',
       text: '',
       stamp: stamp,
-      avatar: 'deepshore.png',
+      avatar: '/user/themes/deepshore/images/deepshore.png',
       sent: false,
       textHtml: true
     };
