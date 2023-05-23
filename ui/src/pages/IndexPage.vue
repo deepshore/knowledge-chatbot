@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="row items-center justify-evenly">
+  <q-page padding class="row justify-evenly">
     <chat-component />
   </q-page>
 </template>
