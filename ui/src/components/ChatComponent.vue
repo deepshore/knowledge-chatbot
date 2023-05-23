@@ -87,7 +87,11 @@ const chatLabel = computed(() => {
 });
 
 // Methods
-async function addMessage() {
+
+/**
+ * Add user question to chat, get answer from chatbot backend and add that answer to chat.
+ */
+async function addMessage(): Promise<void> {
   if (!blockedAPI.value) {
     // Only allow one request add a time
     blockedAPI.value = true;
@@ -136,14 +140,22 @@ async function addMessage() {
     blockedAPI.value = false;
   }
 
-  function buildAnswerText(response: DeepshoreChatResponse) {
+  /**
+   * Build a bot chat answer containing answer text and article links as html containing string and return whole string.
+   * @param response An axios response object of type DeepshoreChatResponse.
+   */
+  function buildAnswerText(response: DeepshoreChatResponse): string {
     let answer = response.answer;
     let articles = response.related_articles;
     let articleText = buildArticleText(articles);
     return `${answer}${articleText}`;
   }
 
-  function buildArticleText(articles: string[]) {
+  /**
+   * Build a readable text for further articles using the specified articles array and return it as an string.
+   * @param articles An array of article urls as strings.
+   */
+  function buildArticleText(articles: string[]): string {
     if (articles.length == 0 || articles == undefined) {
       return '';
     }
@@ -161,13 +173,21 @@ async function addMessage() {
     return articleText;
   }
 
-  function createTimestamp(format = 'HH:mm') {
+  /**
+   * Create a timestamp for chat messages by specified format and return string of format 'HH:mm Uhr'.
+   * @param format A valid date.formatDate format (default: 'HH:mm')
+   */
+  function createTimestamp(format = 'HH:mm'): string {
     const timeStamp = Date.now();
     const formattedString = `${date.formatDate(timeStamp, format)} Uhr`;
     return formattedString;
   }
 
-  function getRandomInt(max: number) {
+  /**
+   * Get a random number between 0 and max.
+   * @param max A Integer
+   */
+  function getRandomInt(max: number): number {
     return Math.floor(Math.random() * max);
   }
 }
