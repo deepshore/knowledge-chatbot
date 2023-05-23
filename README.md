@@ -4,7 +4,7 @@ A custom knowledge chatbot based on the deepshore knowledgebase
 
 ## motivation
 
-A proof of concept that creatubg chatbots with a custom knowledge base is simple.
+A proof of concept that creating chatbots with a custom knowledge base is simple.
 
 ## architecture
 
