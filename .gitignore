@@ -164,3 +164,7 @@ models/
 thunder-tests
 
 db/
+
+.chroma
+chroma/
+storage/
