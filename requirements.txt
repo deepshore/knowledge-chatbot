@@ -1,2 +1,6 @@
 llama_index==0.6.38
 fastapi[all]
+
+# For testing
+pytest==7.2.1
+httpx==0.24.1
