@@ -1,2 +1,2 @@
-llama_index=="0.6.38"
+llama_index==0.6.38
 fastapi[all]
