@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY requirements.txt /app/
 COPY app/main.py /app/
-COPY storage/ /app/
+COPY storage /app/storage
 
 RUN python -m pip install --upgrade pip && \
     pip install -r requirements.txt
