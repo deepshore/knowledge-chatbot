@@ -1,5 +1,9 @@
 name: Build and Deploy to Cloud Run
-on: [push, pull_request]
+
+on:
+  push:
+    branches: main
+  pull_request:
 
 env:
   GCLOUD_PROJECT_ID: ${{ secrets.GCLOUD_PROJECT_ID }}
