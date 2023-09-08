@@ -167,4 +167,4 @@ db/
 
 .chroma
 chroma/
-storage/
+jupyter/storage/

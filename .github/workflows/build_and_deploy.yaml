@@ -48,10 +48,9 @@ jobs:
         run: echo "implement me"
       - name: Build And Push Docker Image
         uses: docker/build-push-action@v4
-        if: ${{ (github.ref == 'refs/heads/main') || (startsWith(github.ref, 'refs/tags/')) }}
         with:
           context: .
-          push: true
+          push: ${{ (github.ref == 'refs/heads/main') || (startsWith(github.ref, 'refs/tags/')) }}
           tags: ${{ env.GCLOUD_PKG_LOCATION }}/${{ env.GCLOUD_PROJECT_ID }}/${{ env.GCLOUD_IMAGE_REPOSITORY }}/${{ env.APPLICATION_NAME }}:${{ github.sha }}
           cache-from: type=registry,ref=${{ env.GCLOUD_PKG_LOCATION }}/${{ env.GCLOUD_PROJECT_ID }}/${{ env.GCLOUD_IMAGE_REPOSITORY }}/${{ env.APPLICATION_NAME }}:${{ github.sha }}
           cache-to: type=inline
