@@ -26,11 +26,12 @@ jobs:
         with:
           path: ~/.cache/pip
           key: ${{ hashFiles('requirements.txt') }}
-      - name: Install dependencies
+      - name: Run tests
         run: |
           python -m pip install --upgrade pip
           pip install ruff pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pytest
       - id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:
