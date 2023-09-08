@@ -10,7 +10,7 @@ def test_read_root():
     assert response.status_code == 200
     assert response.json() == {"message": "Deepshore Chatbot API"}
 
-def test_read_root():
+def test_post_chatbot():
     ts = int(time.time())
     req = {"question": "Was ist k6.io?", "timestamp": ts}
     response = client.post("/chatbot", json=req)

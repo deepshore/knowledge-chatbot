@@ -80,3 +80,10 @@ jobs:
         env:
           GHR_PATH: build/distributions
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          check_name: 'Pytest'
+          files: |
+            test_results.xml
