@@ -18,6 +18,9 @@ def test_post_chatbot():
 
     res_object = response.json()
 
+    print(res_object['related_articles'])
+
+    assert res_object['related_articles'] == [{'Source': 'https://deepshore.de/knowledge/2023-05-08'}, {'Source': 'https://deepshore.de/knowledge/2023-05-08'}]
     assert res_object['timestamp'] == ts
     assert res_object['origin'] == req
     assert res_object['error'] == None
