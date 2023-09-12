@@ -167,4 +167,6 @@ db/
 
 .chroma
 chroma/
-storage/
+jupyter/storage/
+
+test_results.xml
