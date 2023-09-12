@@ -51,7 +51,7 @@ async def ask_chatbot(request: DeepshoreChatRequest):
 
         related_articles = []
         for ex_i in response.metadata:
-            related_articles.append(response.metadata[ex_i])
+            related_articles.append(response.metadata[ex_i]['Source'])
 
         return {"answer": response.response,
                 "related_articles": related_articles,
