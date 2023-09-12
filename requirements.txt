@@ -1,5 +1,6 @@
 llama_index==0.6.38
 fastapi==0.99.1
+uvicorn[standard]==0.23.2
 
 # For testing
 pytest==7.2.1
