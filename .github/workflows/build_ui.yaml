@@ -36,6 +36,10 @@ jobs:
           name: static-files
           path: ui/dist/spa/
   docker-build:
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
     needs: node-build
     runs-on: ubuntu-latest
     steps:
@@ -52,8 +56,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          context: ui/
-          images: ${{ env.REGISTRY }}/${{ github.repository }}
+          images: ${{ env.REGISTRY }}/${{ github.repository }}/ui
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
