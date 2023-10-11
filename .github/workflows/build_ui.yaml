@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: static-files
-          path: dist/
+          path: ui/dist/spa/
   docker-build:
     needs: node-build
     runs-on: ubuntu-latest
@@ -48,7 +48,6 @@ jobs:
           path: dist/
       - name: Display structure of downloaded files
         run: ls -R
-        working-directory: dist/
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
