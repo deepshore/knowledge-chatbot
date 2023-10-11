@@ -1,5 +1,7 @@
 FROM python:3.10-slim-bullseye
 
+LABEL org.opencontainers.image.source = "https://github.com/deepshore/knowledge-chatbot"
+
 WORKDIR /app
 
 COPY requirements.txt /app/
