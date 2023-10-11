@@ -7,8 +7,10 @@ on:
     paths:
       - "ui/"
   pull_request:
+    branches:
+      - main
     paths:
-      - "ui/"
+      - "ui/**"
 
 env:
   REGISTRY: ghcr.io
