@@ -11,7 +11,7 @@
         :avatar="msg.avatar"
         :sent="msg.sent"
         :text-html="msg.textHtml"
-        size="5"
+        size="10"
       >
         <q-spinner-dots v-if="msg.text.length == 0" size="md" />
         <div
@@ -54,7 +54,7 @@ import { sendQuestion } from 'src/api/index';
 import {
   DeepshoreChatMessage,
   DeepshoreChatRequest,
-  DeepshoreChatResponse
+  DeepshoreChatResponse,
 } from 'src/types/chat';
 
 // data
@@ -65,7 +65,7 @@ const errMessages = [
   'Ich habe die Frage leider nicht verstanden. Bitte versuche es mit einer anderen Formulierung.',
   'Ich habe leider keine Antwort parat. Kannst du die Frage anders formulieren?',
   'Tut mir leid, aber ich kann deine Frage leider nicht beantworten. Bitte versuche es mit einer anderen Formulierung.',
-  'Könntest du die Frage bitte noch einmal anders formulieren?'
+  'Könntest du die Frage bitte noch einmal anders formulieren?',
 ];
 
 // computed
@@ -105,7 +105,7 @@ async function addMessage(): Promise<void> {
       stamp: stamp,
       //avatar: 'avatar.png',
       sent: true,
-      textHtml: false
+      textHtml: false,
     };
     chat.value.push(msg);
     // Add tmp answer to chat
@@ -116,7 +116,7 @@ async function addMessage(): Promise<void> {
       stamp: stamp,
       avatar: '/user/themes/deepshore/images/deepshore.png',
       sent: false,
-      textHtml: true
+      textHtml: true,
     };
     // Add "typing" answer to chat
     chat.value.push(chatAnswer);
@@ -125,7 +125,7 @@ async function addMessage(): Promise<void> {
 
     // Send question to backend
     let body: DeepshoreChatRequest = {
-      question: question
+      question: question,
     };
     const response = await sendQuestion(body);
     let answer: string;
