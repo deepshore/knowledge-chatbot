@@ -32,6 +32,7 @@ jobs:
           name: static-files
           path: dist/
   docker-build:
+    needs: node-build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
