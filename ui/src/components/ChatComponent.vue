@@ -31,6 +31,7 @@
         v-model="message"
         placeholder="Nachricht"
         @keyup.enter="addMessage"
+        :autogrow="true"
       >
         <template v-slot:after>
           <q-btn
