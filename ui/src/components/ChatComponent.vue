@@ -1,5 +1,27 @@
 <template>
   <div class="justify-center chat-div">
+    <q-btn round  size="sm" color="white" @click="loadToolbar" >
+      <q-avatar size="42px">
+        <img :src="'/user/themes/deepshore/images/' + appSettings.icon">
+      </q-avatar>
+    </q-btn>
+  <q-dialog v-model="toolbar">
+      <q-card>
+        <q-toolbar>
+          <q-avatar>
+            <img :src="'/user/themes/deepshore/images/' + appSettings.icon">
+          </q-avatar>
+
+          <q-toolbar-title><span class="text-weight-bold">{{ appSettings.title }}</span></q-toolbar-title>
+
+          <q-btn flat round dense icon="close" v-close-popup />
+        </q-toolbar>
+
+        <q-card-section>
+          {{ appSettings.disclaimer }}
+        </q-card-section>
+      </q-card>
+    </q-dialog>
     <q-scroll-area ref="chatScrollRef" class="chat-scroll">
     <div class="chat-message"><q-chat-message :label="chatLabel" role="heading" aria-level="1" /></div>
     <div class="chat-message">
@@ -53,15 +75,26 @@
 <script setup lang="ts">
 import { ref, computed, Ref } from 'vue';
 import { date } from 'quasar';
-import { sendQuestion } from 'src/api/index';
+import { sendQuestion, getAppSettings } from 'src/api/index';
 import {
   DeepshoreChatMessage,
   DeepshoreChatRequest,
   DeepshoreChatResponse,
 } from 'src/types/chat';
+import { AppSettings } from 'src/types/appsettings';
+
 
 // data
 const chatScrollRef = ref('chatScrollRef')
+let toolbar = ref(true)
+
+const defaultAppSettings: AppSettings = {
+  title: 'Knowledge Chatbot',
+  disclaimer: 'Lorem ipsum' ,
+  icon: 'deepshore.png'
+}
+
+const appSettings: Ref<AppSettings> = ref(defaultAppSettings)
 
 let message = ref('');
 let chat: Ref<Array<DeepshoreChatMessage>> = ref([]);
@@ -92,6 +125,14 @@ const chatLabel = computed(() => {
 });
 
 // Methods
+
+/**
+ * Load toolbar content if not already done then show tooltip
+ */
+async function loadToolbar(): Promise<void> {
+  toolbar.value = true;
+  appSettings.value = await getAppSettings();
+}
 
 /**
  * Add user question to chat, get answer from chatbot backend and add that answer to chat.
