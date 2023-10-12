@@ -1,7 +1,8 @@
 <template>
-  <div class="row justify-center chat-row">
-    <div class="chat-div">
-      <q-chat-message :label="chatLabel" role="heading" aria-level="1" />
+  <div class="justify-center chat-div">
+    <q-scroll-area ref="chatScrollRef" class="chat-scroll">
+    <div class="chat-message"><q-chat-message :label="chatLabel" role="heading" aria-level="1" /></div>
+    <div class="chat-message">
       <q-chat-message
         v-for="msg in chat"
         :key="msg.id"
@@ -11,7 +12,7 @@
         :avatar="msg.avatar"
         :sent="msg.sent"
         :text-html="msg.textHtml"
-        size="10"
+        size="8"
       >
         <q-spinner-dots v-if="msg.text.length == 0" size="md" />
         <div
@@ -23,6 +24,7 @@
         </div>
       </q-chat-message>
     </div>
+  </q-scroll-area>
     <div class="chat-input-div">
       <q-input
         outlined
@@ -58,6 +60,8 @@ import {
 } from 'src/types/chat';
 
 // data
+const chatScrollRef = ref('chatScrollRef')
+
 let message = ref('');
 let chat: Ref<Array<DeepshoreChatMessage>> = ref([]);
 let blockedAPI = ref(false);
@@ -138,6 +142,8 @@ async function addMessage(): Promise<void> {
     chat.value[chat.value.length - 1].text = answer;
     // Allow more requests
     blockedAPI.value = false;
+
+    adjustScroll()
   }
 
   /**
@@ -190,5 +196,11 @@ async function addMessage(): Promise<void> {
   function getRandomInt(max: number): number {
     return Math.floor(Math.random() * max);
   }
+
+
+  function adjustScroll () {
+    chatScrollRef.value.setScrollPercentage('vertical', 1.5, 500)
+  }
+
 }
 </script>
