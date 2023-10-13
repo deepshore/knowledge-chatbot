@@ -73,7 +73,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, Ref } from 'vue';
+import { ref, computed, Ref, onMounted } from 'vue';
 import { date } from 'quasar';
 import { sendQuestion, getAppSettings } from 'src/api/index';
 import {
@@ -95,6 +95,10 @@ const defaultAppSettings: AppSettings = {
 }
 
 const appSettings: Ref<AppSettings> = ref(defaultAppSettings)
+
+onMounted(async () => {
+  appSettings.value = await getAppSettings()
+})
 
 let message = ref('');
 let chat: Ref<Array<DeepshoreChatMessage>> = ref([]);
@@ -210,11 +214,8 @@ async function addMessage(): Promise<void> {
     // Start of additional article answer part
     let articleText = '</br></br>Weiterführende Artikel:<ul>';
     for (let article of articles) {
-      // Get display name for article links if format: 'https://deepshore.de/knowledge/chatgpt-nlp'
-      let articleNames = article.split('/');
-      let articleName = articleNames[articleNames.length - 1];
       // Concate links as <a> tag list entries
-      articleText = `${articleText}<li><a href="${article}" target="_blank">${articleName}</li>`;
+      articleText = `${articleText}<li><a href="${article}" target="_blank">${article}</li>`;
     }
     // Close unsorted list
     articleText = `${articleText}</ul>`;

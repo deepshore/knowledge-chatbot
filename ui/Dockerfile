@@ -6,5 +6,6 @@ LABEL org.opencontainers.image.source = "https://github.com/deepshore/knowledge-
 COPY dist/spa /usr/share/nginx/html
 
 COPY /webserver/nginx.conf  /etc/nginx/conf.d/default.conf
+COPY /webserver/appsettings.json /usr/share/nginx/html/appsettings.json
 
 EXPOSE 80

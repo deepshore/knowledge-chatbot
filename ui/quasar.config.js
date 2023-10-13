@@ -78,14 +78,22 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-devServer
     devServer: {
       proxy: {
-        // proxy all requests starting with /api to jsonplaceholder
+        // proxy all requests starting with /chatbot
         '/chatbot': {
           target: 'http://localhost:8080',
+          changeOrigin: false,
+          secure: false,
+        },
+        '/appsettings': {
+          target: 'http://localhost:8080',
+          changeOrigin: false,
+          secure: false,
         },
       },
       server: {
         type: 'http',
       },
+      host: '0.0.0.0',
       port: 8081,
       open: true, // opens browser window automatically
     },

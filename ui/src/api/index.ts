@@ -10,6 +10,6 @@ export async function sendQuestion(
 }
 
 export async function getAppSettings(): Promise<AppSettings> {
-  const response = await api.get('/disclaimer');
+  const response = await api.get('/appsettings');
   return response.data;
 }
