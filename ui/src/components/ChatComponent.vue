@@ -18,7 +18,7 @@
         </q-toolbar>
 
         <q-card-section>
-          {{ appSettings.disclaimer }}
+          <div v-html="appSettings.disclaimer"></div>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -90,7 +90,7 @@ let toolbar = ref(true)
 
 const defaultAppSettings: AppSettings = {
   title: 'Knowledge Chatbot',
-  disclaimer: 'Lorem ipsum' ,
+  disclaimer: 'Lorem ipsum<br />dolorem' ,
   icon: 'deepshore.png'
 }
 
