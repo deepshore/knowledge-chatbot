@@ -103,12 +103,6 @@ onMounted(async () => {
 let message = ref('');
 let chat: Ref<Array<DeepshoreChatMessage>> = ref([]);
 let blockedAPI = ref(false);
-const errMessages = [
-  'Ich habe die Frage leider nicht verstanden. Bitte versuche es mit einer anderen Formulierung.',
-  'Ich habe leider keine Antwort parat. Kannst du die Frage anders formulieren?',
-  'Tut mir leid, aber ich kann deine Frage leider nicht beantworten. Bitte versuche es mit einer anderen Formulierung.',
-  'Könntest du die Frage bitte noch einmal anders formulieren?',
-];
 
 // computed
 const isDisabled = computed(() => {
@@ -180,7 +174,8 @@ async function addMessage(): Promise<void> {
     const response = await sendQuestion(body);
     let answer: string;
     if (response.error) {
-      answer = errMessages[getRandomInt(errMessages.length - 1)];
+      answer = 'Leider ist ein Fehler aufgetreten. Bitte versuche es doch noch einmal.';
+      console.log(response.error)
     } else {
       answer = buildAnswerText(response);
     }

@@ -5,8 +5,12 @@ import { AppSettings } from '../types/appsettings';
 export async function sendQuestion(
   data: DeepshoreChatRequest
 ): Promise<DeepshoreChatResponse> {
-  const response = await api.post('/chatbot', data);
-  return response.data;
+  try{
+    const response = await api.post('/chatbot', data);
+    return response.data;
+  } catch (e) {
+    return { 'error': JSON.stringify(e), 'answer': '', 'related_articles': [] }
+  }
 }
 
 export async function getAppSettings(): Promise<AppSettings> {
