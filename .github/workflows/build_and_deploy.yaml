@@ -8,6 +8,11 @@ on:
       - "!jupyter/**"
       - "!ui/**"
   pull_request:
+    branches:
+      - main
+    paths:
+      - "!jupyter/**"
+      - "!ui/**"
 
 env:
   GCLOUD_PROJECT_ID: ${{ secrets.GCLOUD_PROJECT_ID }}
