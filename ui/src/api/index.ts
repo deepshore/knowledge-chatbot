@@ -5,7 +5,7 @@ import { AppSettings } from '../types/appsettings';
 export async function sendQuestion(
   data: DeepshoreChatRequest
 ): Promise<DeepshoreChatResponse> {
-  try{
+  try {
     const response = await api.post('/chatbot', data);
     return response.data;
   } catch (e) {
