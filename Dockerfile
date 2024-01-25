@@ -4,7 +4,7 @@ LABEL org.opencontainers.image.source = "https://github.com/deepshore/knowledge-
 
 WORKDIR /app
 
-COPY requirements.txt /app/
+COPY requirements-all.txt /app/
 COPY app/main.py /app/
 COPY storage /app/storage
 
