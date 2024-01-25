@@ -39,7 +39,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install ruff pytest
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements-all.txt ]; then pip install -r requirements-all.txt; fi
           pytest --junitxml=test_results.xml
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
