@@ -9,6 +9,6 @@ COPY app/main.py /app/
 COPY storage /app/storage
 
 RUN python -m pip install --upgrade pip && \
-    pip install -r requirements.txt
+    pip install -r requirements-all.txt
 
 CMD uvicorn main:app --port 8080 --host 0.0.0.0
