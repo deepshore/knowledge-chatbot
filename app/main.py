@@ -29,7 +29,7 @@ persist_dir = './storage' if (os.environ.get('PERSIST_DIR') == None) else os.env
 storage_context = StorageContext.from_defaults(persist_dir=persist_dir)
 # load index
 index = load_index_from_storage(storage_context)
-print("PEEN")
+
 if not index:
     raise Exception("Sorry, no numbers below zero")
 
