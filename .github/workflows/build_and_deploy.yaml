@@ -4,15 +4,15 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "!jupyter/**"
-      - "!ui/**"
+    paths-ignore:
+      - "jupyter/**"
+      - "ui/**"
   pull_request:
     branches:
       - main
-    paths:
-      - "!jupyter/**"
-      - "!ui/**"
+    paths-ignore:
+      - "jupyter/**"
+      - "ui/**"
 
 env:
   GCLOUD_PROJECT_ID: ${{ secrets.GCLOUD_PROJECT_ID }}
