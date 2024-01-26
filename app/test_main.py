@@ -2,6 +2,7 @@ from fastapi.testclient import TestClient
 from .main import app
 from .main import DeepshoreChatRequest
 import time
+import pytest
 
 client = TestClient(app)
 
@@ -9,6 +10,13 @@ def test_read_root():
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {"message": "Deepshore Chatbot API"}
+
+@pytest.mark.skip(reason="this should be tested individually beacuse it really scrapes the site and generates the index")
+def test_get_refresh_index():
+    import nest_asyncio
+    nest_asyncio.apply()
+    response = client.put("/refresh-index")
+    assert response.status_code == 204
 
 def test_post_chatbot():
     ts = int(time.time())
