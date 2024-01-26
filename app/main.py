@@ -9,7 +9,6 @@ from llama_index.embeddings.openai import OpenAIEmbeddingMode, OpenAIEmbeddingMo
 from pydantic import BaseModel
 from typing import Union
 from llama_hub.web.sitemap.base import SitemapReader
-from llama_index.prompts.system import SHAKESPEARE_WRITING_ASSISTANT
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))

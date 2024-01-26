@@ -46,5 +46,4 @@ def test_post_chatbot_hack():
     assert res_object['timestamp'] == ts
     assert res_object['origin'] == req
     assert res_object['error'] == None
-    #assert res_object['related_articles'] == ['https://deepshore.de/knowledge/2023-05-08', 'https://deepshore.de/knowledge/2023-05-08']
     assert res_object['answer'] == 'Entschuldigung, aber ich kann nur auf Deutsch antworten. Wie kann ich Ihnen weiterhelfen?'
