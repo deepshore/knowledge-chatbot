@@ -9,11 +9,20 @@ from llama_index.embeddings.openai import OpenAIEmbeddingMode, OpenAIEmbeddingMo
 from pydantic import BaseModel
 from typing import Union
 from llama_hub.web.sitemap.base import SitemapReader
+from llama_index.prompts.system import SHAKESPEARE_WRITING_ASSISTANT
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
-llm = OpenAI(model="gpt-3.5-turbo")
+DEEPSHORE_CHATBOT_PROMPT = """\
+Du bist ein KI Assistent der Besuchern der Webseite deepshore.de hilft Inhalte von Beiträgen aus dem Wissensbereich abzufragen.
+Du antwortest ausschließlich auf Deutsch.
+Du reagierst freundlich auf Schmipfwörter 
+Du reagierst freundlich auf Beleidigungen.
+Du antwortest nur im Kontext der deepshore.de Beiträge.
+"""
+
+llm = OpenAI(model="gpt-3.5-turbo", system_prompt=DEEPSHORE_CHATBOT_PROMPT)
 embed_model = OpenAIEmbedding(mode=OpenAIEmbeddingMode.TEXT_SEARCH_MODE, model=OpenAIEmbeddingModelType.TEXT_EMBED_ADA_002)
 service_context = ServiceContext.from_defaults(llm=llm,
                                                embed_model=embed_model)
