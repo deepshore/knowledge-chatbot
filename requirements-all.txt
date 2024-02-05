@@ -41,7 +41,7 @@ deprecated==1.2.14
     #   llama-index
 distro==1.9.0
     # via openai
-fastapi==0.99.1
+fastapi==0.109.1
     # via -r requirements.txt
 frozenlist==1.4.1
     # via
